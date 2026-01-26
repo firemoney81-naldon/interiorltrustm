@@ -1,23 +1,540 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+<style>
+    /* Google Fonts Import */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+    /* CSS Reset & Basic Styling */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7; /* Increased line height for better readability */
+      color: #333;
+      background: #f4f7f6; /* Soft, warm light gray background */
+    }
+    header, nav, section, footer {
+      padding: 20px;
+      max-width: 1000px; /* Wider content area */
+      margin: auto;
+      background: #fff;
+      margin-bottom: 20px; /* Increased margin between sections */
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Softer, more pronounced shadow */
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #3a5a40; /* Deep forest green for professional feel */
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    header p {
+      text-align: center;
+      color: #555;
+      font-size: 1.1rem;
+    }
+
+    /* Navigation Styling */
+    nav {
+      background: #d6e3e1; /* Soft, light teal background for nav */
+      border-radius: 10px;
+      text-align: center;
+      padding: 15px 0;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    nav a {
+      color: #3a5a40;
+      margin: 0 18px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    nav a:hover {
+      color: #ff8c42; /* Soft orange hover effect */
+      text-decoration: none;
+    }
+    nav a:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background-color: #ff8c42;
+      transition: width 0.3s ease;
+    }
+    nav a:hover:before {
+      width: 100%;
+    }
+
+    /* Section Heading Styling */
+    h2 {
+      border-bottom: 3px solid #ff8c42; /* Soft orange accent line */
+      padding-bottom: 10px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      color: #3a5a40;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+      color: #ff8c42;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+    h4 {
+      font-size: 1.2rem;
+      color: #555;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      border-left: 4px solid #3a5a40;
+      padding-left: 10px;
+    }
+
+    /* Card and Service Styling */
+    .service-card, .example-card {
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      background: #fdfdfd;
+      border: 1px solid #e0e0e0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; /* Flexbox for better layout within cards */
+      align-items: center;
+    }
+    .service-card:hover, .example-card:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+    }
+    .service-card .icon {
+      font-size: 2.5rem;
+      margin-right: 20px;
+      color: #ff8c42;
+    }
+    .service-card p {
+      margin: 0;
+    }
+
+    /* Call to Action (CTA) Button Styling */
+    .cta {
+      display: inline-block;
+      background-color: #3a5a40; /* Deep green CTA button */
+      color: white;
+      padding: 18px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin-top: 20px;
+      box-shadow: 0 4px 10px rgba(58, 90, 64, 0.4);
+    }
+    .cta:hover {
+      background-color: #2e4a32;
+      transform: translateY(-2px);
+    }
+
+    /* Form Styling */
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #444;
+    }
+    form input, form select, form textarea {
+      width: calc(100% - 20px);
+      padding: 12px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    form button {
+      margin-top: 25px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* FAQ (Accordion-like structure) */
+    dl.faq {
+      margin-top: 20px;
+    }
+    dl.faq dt {
+      font-weight: 700;
+      margin-top: 15px;
+      padding: 12px;
+      background: #f7f7f7;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #3a5a40;
+      border-left: 5px solid #ff8c42;
+      transition: background 0.3s;
+    }
+    dl.faq dt:hover {
+      background: #f0f0f0;
+    }
+    dl.faq dd {
+      margin-left: 0;
+      padding: 15px;
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* Data Visualization (Table/Graph Simulation) */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    .data-table th {
+      background-color: #f7f7f7;
+      font-weight: 600;
+      color: #3a5a40;
+    }
+    .data-table tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+    .data-table caption {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #444;
+    }
+
+    /* Additional content styles */
+    .content-highlight {
+      background: #fff8e1; /* Light yellow background for highlight */
+      border-left: 5px solid #ffab00;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
+    }
+    ul, ol {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      color: #ff8c42;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #ff6f00;
+      text-decoration: underline;
+    }
+    
+    /* Responsive design adjustments */
+    @media (max-width: 768px) {
+      nav a {
+        display: block;
+        padding: 8px 0;
+        margin: 0;
+        font-size: 0.95rem;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .service-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .service-card .icon {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+    /* Long-form text specific styling */
+    section p {
+      text-align: justify;
+      hyphens: auto;
+      margin-bottom: 1em;
+    }
+    section strong {
+      font-weight: 700;
+      color: #ff8c42; /* Emphasis color */
+    }
+  </style>
+
+  <!-- JSON-LD Schema: HowTo -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "아파트 리모델링 절차",
+    "description": "2026년 최신 기준으로 아파트 인테리어 및 리모델링을 진행하는 상세 순서 가이드입니다. 예산 계획부터 업체 선정, 공사 진행, 사후관리까지 전 과정을 안내합니다.",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "KRW",
+      "value": "30000000"
+    },
+    "step": [
+      {
+        "@type": "HowToStep",
+        "name": "1단계: 리모델링 목표 설정 및 예산 계획",
+        "text": "리모델링을 시작하기 전에 어떤 공간을 어떻게 바꾸고 싶은지 명확한 목표를 세우고, 전체 예상 비용(견적)을 산출하여 예산을 확정합니다. 20평대, 30평대, 40평대 아파트 평형별 평균 비용을 참고하여 현실적인 계획을 수립합니다."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "2단계: 인테리어 디자인 및 자재 선택",
+        "text": "자신이 원하는 인테리어 스타일(미니멀리즘, 북유럽 스타일 등)을 정하고, 필요한 자재(마루, 타일, 벽지, 조명)를 선택합니다. 이 단계에서 디자인 전문가와 협의하여 3D 시뮬레이션을 진행하면 시행착오를 줄일 수 있습니다."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "3단계: 전문 업체 선정 및 계약",
+        "text": "여러 업체로부터 견적을 받고 포트폴리오(시공 사례)를 비교합니다. 내돈내산 후기와 평판을 확인하고, 리모델링 계약 시 공사 범위, 기간, 비용, 사후관리(AS) 조건을 명확히 기재해야 합니다."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "4단계: 공사 실행 및 현장 관리",
+        "text": "공사 순서(철거, 설비, 목공, 전기, 타일, 도배, 마루, 주방가구 설치 등)에 따라 작업이 진행됩니다. 공사 중 현장 방문을 통해 진행 상황을 점검하고, 예상치 못한 문제에 신속하게 대응합니다."
+      },
+      {
+        "@type": "HowToStep",
+        "name": "5단계: 최종 점검 및 입주",
+        "text": "공사가 완료되면 마감 상태를 꼼꼼히 확인하고, 계약서에 명시된 내용과 일치하는지 최종 점검합니다. 입주 후에도 발생할 수 있는 문제에 대비하여 사후관리 절차를 확인합니다."
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header id="top">
+  <h1>아파트리모델링순서 비용, 견적, 후기 분석 (2026년 기준)</h1>
+  <p>2026년 최신 트렌드를 반영한 <strong>아파트 인테리어 순서 가이드</strong>, 지금 바로 확인하고 무료 견적 신청하세요!</p>
+  <a href="#quote-form" class="cta">무료 견적/상담 신청하기</a>
+</header>
+
+<nav>
+  <a href="#process">리모델링 순서</a>
+  <a href="#cost">비용 견적 가이드</a>
+  <a href="#tips">주의사항 및 팁</a>
+  <a href="#case-study">내돈내산 후기</a>
+  <a href="#quote-form">견적 신청</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<section id="process" aria-label="리모델링 진행 순서">
+  <h2>아파트 리모델링, 올바른 순서가 핵심입니다.</h2>
+  <div class="content-highlight">
+    <p>성공적인 아파트 리모델링을 위해서는 체계적인 순서에 따라 진행하는 것이 중요합니다. 단순히 '예쁜 집'을 만드는 것을 넘어, <strong>안전하고 효율적으로 공사를 완료</strong>하기 위한 필수적인 단계를 안내해 드립니다. 특히 2026년도에는 ESG(친환경) 인테리어, 스마트홈 기술 도입이 중요해지면서 초기 계획 단계의 중요성이 더욱 강조되고 있습니다.</p>
+  </div>
+  <ol>
+    <li>
+      <h3>1단계: 리모델링 목표 설정 및 예산 계획 (견적 산출)</h3>
+      <p>가장 먼저 어떤 공간을, 왜 리모델링하려는지 목표를 명확히 해야 합니다. 전체 리모델링인지, 주방, 화장실, 거실 등의 부분 리모델링인지 범위를 정하세요. 다음으로, 전체 예상 비용(견적)을 산출하여 예산을 확정합니다. 20평대 아파트 리모델링 평균 비용은 3000만원 내외, 30평대는 4000~5000만원, 40평대는 6000만원 이상으로 시작하며, 자재 등급에 따라 가격 차이가 큽니다. 리모델링 예산은 전체 비용의 10% 정도는 예비 비용으로 남겨두는 것이 좋습니다.</p>
+    </li>
+    <li>
+      <h3>2단계: 인테리어 디자인 및 자재 선택 (자재 선택의 중요성)</h3>
+      <p>원하는 인테리어 스타일(미니멀리즘, 북유럽 스타일, 모던 스타일 등)을 정하고, 이에 맞는 자재를 선택합니다. 마루, 타일, 벽지, 조명, 싱크대 등 각 자재의 장단점을 파악하고 가격을 비교해야 합니다. 최근에는 친환경 인증 자재나 에너지 효율을 높이는 스마트 인테리어 자재가 인기를 끌고 있습니다. 자재 선택은 리모델링 비용에 큰 영향을 미치므로, 합리적인 예산 내에서 최적의 선택을 하는 것이 중요합니다.</p>
+    </li>
+    <li>
+      <h3>3단계: 전문 업체 선정 및 계약 (신뢰성 있는 업체 찾기)</h3>
+      <p>리모델링 성공의 80%는 업체 선정에 달려있습니다. 여러 업체로부터 견적을 받고 포트폴리오(시공 사례)와 <strong>내돈내산 후기</strong>를 꼼꼼히 비교합니다. 특히 지역 기반 업체(서울, 경기, 부산, 대구 등)의 평판을 확인하고, 무조건 저렴한 곳보다는 투명한 견적을 제시하는 곳을 선택해야 합니다. 계약서에는 공사 범위, 기간, 비용, 사후관리(AS) 조건을 상세히 명시해야 합니다.</p>
+    </li>
+    <li>
+      <h3>4단계: 공사 실행 및 현장 관리 (체계적인 공사 일정)</h3>
+      <p>리모델링 공사는 일반적으로 철거, 설비(수도, 전기), 목공, 타일, 도배, 마루, 주방가구 설치 순서로 진행됩니다. 각 공정별로 전문가들이 투입되며, 이사일정에 맞춰 공사 기간을 철저히 관리해야 합니다. 소음 발생으로 인한 민원이나 예상치 못한 구조 문제 등 변수에 대비하여 현장 관리를 철저히 해야 합니다.</p>
+    </li>
+    <li>
+      <h3>5단계: 최종 점검 및 입주 (사후 관리 확인)</h3>
+      <p>공사가 완료되면 마감 상태를 꼼꼼히 확인합니다. 도배지나 마루의 상태, 타일 줄눈, 수전 등 모든 마감재가 계약 내용과 일치하는지 점검합니다. 입주 후에도 하자가 발생할 수 있으므로, 업체가 제공하는 사후관리(AS) 기간과 조건을 다시 한번 확인해야 합니다.</p>
+    </li>
+  </ol>
+</section>
+
+<section id="cost" aria-label="리모델링 비용 견적 가이드">
+  <h2>아파트 리모델링 비용 견적 가이드: 2026년 최신 정보</h2>
+  <p>리모델링 견적은 평당 가격, 자재 등급, 공사 범위에 따라 천차만별입니다. 특히 2026년도에는 인건비와 자재비가 상승하면서 전체적인 평균 비용이 높아지는 추세입니다. 아래 표는 아파트 평형별 <strong>전체 리모델링 예상 비용</strong>을 나타냅니다. (부분 리모델링 시 비용은 더 낮아질 수 있습니다.)</p>
+
+  <table class="data-table">
+    <caption>아파트 평형별 전체 리모델링 예상 비용 비교 (2026년 기준)</caption>
+    <thead>
+      <tr>
+        <th>평형대</th>
+        <th>평균 예상 비용 (원)</th>
+        <th>주요 공사 범위</th>
+        <th>예상 기간 (주)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>20평대 (20~25평)</td>
+        <td>2,500만원 ~ 4,000만원</td>
+        <td>도배/장판, 주방, 화장실(1개), 조명, 문 교체</td>
+        <td>3 ~ 4주</td>
+      </tr>
+      <tr>
+        <td>30평대 (30~35평)</td>
+        <td>4,000만원 ~ 6,000만원</td>
+        <td>도배/강마루, 주방, 화장실(2개), 샤시(선택), 조명, 중문</td>
+        <td>4 ~ 5주</td>
+      </tr>
+      <tr>
+        <td>40평대 이상</td>
+        <td>6,000만원 ~ 1억원+</td>
+        <td>전체 공사, 맞춤 제작 가구, 샤시 포함 풀 리모델링</td>
+        <td>6 ~ 8주</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>리모델링 비용을 결정하는 주요 요소 분석:</h4>
+  <ul>
+    <li><strong>자재 등급:</strong> 벽지, 마루, 타일 등의 등급에 따라 비용이 크게 달라집니다. 수입산 고급 자재를 사용할 경우 견적은 상승합니다.</li>
+    <li><strong>샤시 교체:</strong> 샤시(창호)는 단열과 방음에 핵심적인 역할을 하지만, 전체 리모델링 비용에서 가장 큰 비중을 차지하는 항목 중 하나입니다. 샤시를 교체할 경우 비용이 1,000만원 이상 추가될 수 있습니다.</li>
+    <li><strong>주방 및 욕실:</strong> 주방 싱크대와 욕실 타일/위생도기는 가격 편차가 매우 큽니다. 주방 가구는 브랜드 및 맞춤 제작 여부에 따라 가격이 크게 달라집니다.</li>
+    <li><strong>공사 범위:</strong> 전체 리모델링과 부분 리모델링(예: 주방 리모델링, 화장실 리모델링)의 비용 차이는 명확합니다. <strong>저렴한 곳</strong>을 찾으려면 꼭 필요한 부분만 진행하는 것을 고려해야 합니다.</li>
+  </ul>
+</section>
+
+<section id="tips" aria-label="리모델링 성공을 위한 팁 및 주의사항">
+  <h2>리모델링 성공을 위한 핵심 팁과 주의사항</h2>
+  <h3>1. "내돈내산" 후기를 통한 업체 비교의 중요성</h3>
+  <p>리모델링은 한 번 시작하면 되돌리기 어렵습니다. 따라서 <strong>내돈내산 후기</strong>를 참고하여 업체를 선정하는 것이 중요합니다. 단순히 광고성 글이 아닌, 공사 진행 과정과 A/S 경험이 구체적으로 담긴 후기를 찾아야 합니다. "서울 리모델링 추천", "경기 인테리어 잘하는 곳" 등의 키워드로 검색하여 <strong>순위 비교</strong>를 통해 신뢰성 있는 업체를 선별하세요.</p>
+
+  <h3>2. 전체 리모델링 vs. 부분 리모델링 장단점 비교</h3>
+  <table class="data-table">
+    <caption>전체 vs. 부분 리모델링 장단점 비교</caption>
+    <thead>
+      <tr>
+        <th>구분</th>
+        <th>장점</th>
+        <th>단점</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>전체 리모델링</strong></td>
+        <td>집 전체의 통일감 있는 디자인 구현, 높은 주거 만족도, 하자 보수 용이</td>
+        <td>높은 초기 비용, 긴 공사 기간, 임시 거주지 필요</td>
+      </tr>
+      <tr>
+        <td><strong>부분 리모델링</strong></td>
+        <td>비교적 저렴한 비용, 짧은 공사 기간, 기존 거주 중 공사 가능</td>
+        <td>전체적인 통일성 부족, 추후 추가 공사 필요 가능성</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>3. 2026년 리모델링 트렌드: 스마트홈과 친환경 자재</h3>
+  <p>2026년도 인테리어 트렌드는 '스마트홈 기술'과 '친환경 자재'입니다. 음성인식 조명, 스마트 도어록, 온도 조절 시스템 등을 도입하여 편리성을 높이는 리모델링이 증가하고 있습니다. 또한, 포름알데히드 등 유해 물질이 없는 친환경 벽지나 마루를 선택하여 건강한 주거 환경을 조성하는 것이 중요합니다.</p>
+
+  <h3>4. 정부 지원 정책 활용하기</h3>
+  <p>일부 지역에서는 노후 주택 리모델링 시 지방자치단체나 정부에서 제공하는 지원금을 받을 수 있습니다. 특히 에너지 효율 개선(샤시 교체, 단열 보강)에 대한 지원금이 많으니, <strong>국토교통부</strong>나 <strong>지방자치단체 홈페이지</strong>를 통해 관련 정보를 확인해 보세요.</p>
+</section>
+
+<section id="case-study" aria-label="고객 사례 및 내돈내산 후기">
+  <h2>실제 리모델링 고객 사례 및 내돈내산 후기</h2>
+  <div class="example-card">
+    <h3>서울 강남구 34평 아파트 리모델링 후기</h3>
+    <p><strong>주요 공사:</strong> 주방 확장 및 구조 변경, 샤시 교체, 욕실 2개 전체 리모델링</p>
+    <p>“여러 업체 견적을 받아봤지만, 합리적인 <strong>비용</strong>과 꼼꼼한 시공으로 이 업체를 선택했습니다. 특히 주방 구조 변경 덕분에 집이 훨씬 넓어 보여요. 공사 기간 동안 사다리차 사용과 폐기물 처리도 깔끔했습니다.”</p>
+    <p><em>- 김OO 고객님 (2026.03)</em></p>
+  </div>
+  <div class="example-card">
+    <h3>경기 성남시 22평 원룸형 아파트 인테리어 사례</h3>
+    <p><strong>주요 공사:</strong> 부분 리모델링 (벽지, 마루, 조명, 중문 설치)</p>
+    <p>“<strong>저렴한 곳</strong>을 찾았는데, 예상했던 <strong>가격</strong>보다 더 합리적인 견적을 받았습니다. 부분 리모델링이었지만 집 전체 분위기가 확 바뀌었어요. 특히 마루와 벽지 색 조합이 만족스럽습니다.”</p>
+    <p><em>- 이OO 고객님 (2025.12)</em></p>
+  </div>
+  <div class="example-card">
+    <h3>부산 해운대구 45평 아파트 전체 리모델링</h3>
+    <p><strong>주요 공사:</strong> 전체 철거 후 재시공, 시스템 에어컨 설치, 맞춤 제작 가구</p>
+    <p>“꽤 큰 규모의 공사라 걱정이 많았는데, <strong>전문업체</strong>의 체계적인 관리 덕분에 순조롭게 진행되었습니다. <strong>장점</strong>은 물론 <strong>단점</strong>까지 솔직하게 알려주셔서 신뢰가 갔습니다. <strong>내돈내산</strong>으로 진행한 만큼 만족도가 높습니다.”</p>
+    <p><em>- 박OO 고객님 (2026.01)</em></p>
+  </div>
+</section>
+
+<section id="local-coverage" aria-label="전국 지역별 리모델링 정보">
+  <h2>전국 지역별 리모델링 정보 (서울, 경기, 부산, 대구 등)</h2>
+  <p>아파트 리모델링 비용과 트렌드는 지역에 따라 차이가 있습니다. <strong>서울</strong>, <strong>강남</strong>, <strong>경기</strong> 지역은 인테리어 업체 수가 많아 경쟁이 치열한 반면, <strong>부산</strong>, <strong>대구</strong>, <strong>인천</strong>, <strong>광주</strong>, <strong>대전</strong>, <strong>울산</strong> 등의 광역시와 <strong>수원</strong>, <strong>용인</strong>, <strong>평택</strong>, <strong>성남</strong>, <strong>안양</strong>, <strong>부천</strong>, <strong>고양</strong>, <strong>김포</strong>, <strong>하남</strong>, <strong>남양주</strong>, <strong>청주</strong>, <strong>천안</strong>, <strong>아산</strong>, <strong>전주</strong>, <strong>포항</strong>, <strong>창원</strong>, <strong>제주</strong> 등 주요 도시에서도 전문적인 리모델링 서비스를 제공하는 업체들이 늘고 있습니다. 지역별 <strong>견적 비교</strong>를 통해 최적의 업체를 선택하는 것이 현명합니다.</p>
+</section>
+
+<section id="quote-form" aria-label="무료 견적 신청">
+  <h2>아파트 리모델링 무료 견적/상담 신청하기</h2>
+  <form action="/submit-estimate" method="POST" aria-describedby="quote-description">
+    <p id="quote-description">아래 폼을 작성해주시면 <strong>아파트리모델링순서</strong> 상담 및 <strong>평균 비용 견적</strong> 안내를 도와드립니다. 2026년 최신 트렌드에 맞는 맞춤형 인테리어를 제안해 드립니다.</p>
+
+    <label for="apartment-type">아파트 평형대 (예상 평형)</label>
+    <select id="apartment-type" name="type" required>
+      <option value="">평형대를 선택하세요</option>
+      <option value="20평대">20평대 (20~25평)</option>
+      <option value="30평대">30평대 (26~35평)</option>
+      <option value="40평대">40평대 (36~45평)</option>
+      <option value="50평대이상">50평대 이상</option>
+    </select>
+
+    <label for="renovation-type">리모델링 유형</label>
+    <select id="renovation-type" name="renovation-type" required>
+      <option value="">리모델링 유형을 선택하세요</option>
+      <option value="full">전체 리모델링</option>
+      <option value="partial">부분 리모델링 (주방, 욕실 등)</option>
+      <option value="kitchen">주방 리모델링</option>
+      <option value="bathroom">욕실 리모델링</option>
+      <option value="other">기타</option>
+    </select>
+
+    <label for="start-location">현재 거주지/공사 예정 지역</label>
+    <input type="text" id="start-location" name="location" placeholder="예: 서울시 강남구, 경기도 수원시" required />
+
+    <label for="move-date">이사/공사 희망 시작일</label>
+    <input type="date" id="move-date" name="date" required />
+
+    <label for="phone">연락처</label>
+    <input type="tel" id="phone" name="phone" placeholder="010-1234-5678" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required />
+
+    <button type="submit" class="cta">견적 요청하기</button>
+  </form>
+</section>
+
+<section id="faq" aria-label="자주 묻는 질문 FAQ">
+  <h2>자주 묻는 질문 (FAQ)</h2>
+  <dl class="faq">
+    <dt>아파트 리모델링 기간은 얼마나 걸리나요?</dt>
+    <dd>전체 리모델링의 경우, 20평대는 평균 3~4주, 30평대는 4~5주 정도 소요됩니다. 부분 리모델링(예: 주방 또는 욕실만)은 1~2주 내로 완료될 수 있습니다. 공사 범위와 자재 수급 상황에 따라 기간은 변동될 수 있습니다.</dd>
+
+    <dt>부분 리모델링과 전체 리모델링 중 어떤 것을 선택해야 할까요?</dt>
+    <dd><strong>장단점 비교</strong>를 통해 결정하세요. 예산이 한정적이라면 부분 리모델링을, 주거 만족도를 높이고 싶고 오래 거주할 예정이라면 전체 리모델링을 추천합니다. 특히 <strong>샤시 교체</strong>나 <strong>배관 공사</strong>처럼 대규모 공사가 필요한 경우 전체 리모델링이 효율적일 수 있습니다.</dd>
+
+    <dt>리모델링 견적 금액이 업체마다 크게 다른 이유는 무엇인가요?</dt>
+    <dd>견적 금액의 차이는 주로 <strong>자재의 등급</strong>(고가/저가), <strong>공사 범위의 상세함</strong>(예: 철거 범위, 폐기물 처리 포함 여부), 그리고 <strong>업체의 마진율</strong>에 따라 발생합니다. 단순히 <strong>저렴한 곳</strong>을 찾기보다는 견적서에 모든 항목이 투명하게 명시되어 있는지 확인해야 합니다.</dd>
+
+    <dt>리모델링을 할 때 주의해야 할 점이 있나요?</dt>
+    <dd>첫째, 아파트 관리사무소에 리모델링 신고를 하고 동의를 얻어야 합니다. 특히 <strong>철거 시 소음</strong>에 대비하여 이웃 주민들에게 양해를 구하는 과정이 필수입니다. 둘째, 계약서에 A/S 기간과 범위를 명확히 명시하세요. 셋째, <strong>내돈내산 후기</strong>를 참고하여 <strong>업체 순위</strong>를 비교하고 신뢰할 수 있는 곳을 선택하세요.</dd>
+  </dl>
+</section>
+
+<section id="contact" aria-label="문의하기">
+  <h2>문의하기 및 추가 정보</h2>
+  <p><strong>010-1234-5678</strong> | <a href="mailto:info@yourdomain.kr">info@yourdomain.kr</a></p>
+  <p>상담 시간: 월~토 09:00~19:00</p>
+  <p><strong>참고 외부 사이트:</strong></p>
+  <ul>
+    <li><a href="https://www.namu.wiki/w/%EC%9D%B8%ED%85%8C%EB%A6%AC%EC%96%B4" target="_blank">나무위키 - 인테리어</a></li>
+    <li><a href="https://www.molit.go.kr/portal/policy/policy04.jsp" target="_blank">국토교통부 주택 정책 정보</a></li>
+    <li><a href="https://www.koreainterior.or.kr/" target="_blank">한국 인테리어 산업 협회</a></li>
+    <li><a href="https://www.gukto.go.kr/" target="_blank">건설/주택 관련 법규 (정부기관)</a></li>
+    <li><a href="https://www.consumer.go.kr/user/cn/index.do" target="_blank">한국소비자원 피해구제 정보</a></li>
+  </ul>
+</section>
+
+
+  
